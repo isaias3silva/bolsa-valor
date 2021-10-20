@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
 @Repository
 public interface QuoteRepository extends PagingAndSortingRepository <Quote, Long> {
     @RestResource(rel = "quotes", path = "quotes")

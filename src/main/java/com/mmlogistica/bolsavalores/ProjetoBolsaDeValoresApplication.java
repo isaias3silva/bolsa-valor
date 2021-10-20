@@ -3,6 +3,7 @@ package com.mmlogistica.bolsavalores;
 import com.mmlogistica.bolsavalores.Entities.Quote;
 import com.mmlogistica.bolsavalores.repository.QuoteRepository;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.math3.random.RandomDataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,26 +24,26 @@ public class ProjetoBolsaDeValoresApplication {
 
 		@Scheduled(fixedDelay = 1000)
 		public void generateDate(){
-			log.info(quoteRepository.findFirstBySymbolOrderByTimestampDesc("Teste")
+			log.info(quoteRepository.findFirstBySymbolOrderByTimestampDesc("TESTE")
 					.map(this::generateNewData)
 					.orElseGet(this::initilizeData));
 		}
 
 	private Quote initilizeData() {
-		return Quote.builder()
+		return quoteRepository.save(Quote.builder()
 				.symbol("TESTE")
-				.openValue(0.22222)
+				.openValue(0.222222)
 				.closeValue(0.222222)
 				.timestamp(new Date())
-				.build();
+				.build());
 	}
 
 	private Quote generateNewData(Quote quote) {
-		return Quote.builder()
+		return quoteRepository.save(Quote.builder()
 				.symbol(quote.getSymbol())
-				.openValue(quote.getOpenValue())
-				.closeValue(quote.getCloseValue())
+				.openValue(quote.getOpenValue() * new RandomDataGenerator().nextUniform(-0.10, 0.10))
+				.closeValue(quote.getCloseValue() * new RandomDataGenerator().nextUniform(-0.10, 0.10))
 				.timestamp(new Date())
-				.build();
+				.build());
 	}
 }
