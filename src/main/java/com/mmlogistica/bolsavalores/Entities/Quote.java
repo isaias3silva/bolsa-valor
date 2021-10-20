@@ -1,4 +1,4 @@
-package com.mmlogistica.bolsavalores;
+package com.mmlogistica.bolsavalores.Entities;
 
 import lombok.*;
 
@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -15,7 +16,7 @@ public class Quote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Symbol;
+    private String symbol;
     private Double openValue;
     private Double closeValue;
     private Date timestamp;
