@@ -24,7 +24,7 @@ public class ProjetoBolsaDeValoresApplication {
 
 		@Scheduled(fixedDelay = 1000)
 		public void generateDate(){
-			log.info(quoteRepository.findFirstBySymbolOrderByTimestampDesc("TESTE")
+			log.info(quoteRepository.findFirstBySymbolOrderByTimestampDesc("symbol")
 					.map(this::generateNewData)
 					.orElseGet(this::initilizeData));
 		}

@@ -16,5 +16,5 @@ public interface QuoteRepository extends PagingAndSortingRepository <Quote, Long
     @RestResource(rel = "quotes", path = "quotes")
     Page<Quote> findAllBySymbol(@Param("symbol")String symbol, Pageable page);
 
-    Optional<Quote> findFirstBySymbolOrderByTimestampDesc(String teste);
+    Optional<Quote> findFirstBySymbolOrderByTimestampDesc(String symbol);
 }
